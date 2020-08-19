@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>		
+		<style>			
+			.box {
+				position: relative;
+				margin: 100px auto;				
+				width: 500px;
+				height: 400px;
+				overflow: hidden;		
+				border: 2px solid #00A4FF;
+				border-radius: 5px;
+			}
+			.boxer {				 
+				position: absolute;
+				width: 2000px;
+				height: 400px;						
+			}
+			.boxer img {	
+				float: left;
+				width: 500px;
+				height: 400px;				
+			}
+			.fuhao {
+				position: absolute;
+				top: 45%;
+				width: 500px;
+				height: 40px;				
+				line-height: 40px;
+				display: none;
+			}
+			.box:hover .fuhao {
+				display:block;
+			}
+			.arrce {
+				width: 20px;
+				height: 40px;
+				background-color: #0000FF;
+				color: #fff;
+				text-align: center;
+			}
+			.left {
+				float: left;				
+			}
+			.right {
+				float: right;				
+			}		
+			/* .buttons {
+				position: absolute;
+				height: 20px;
+				width: 120px;
+				background-color: red;		
+				bottom: 0px;
+			}
+			.buttons span {
+				padding: 0px 5px;				
+				background-color: #0000FF;
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			.buttons .on {
+				background-color: red;
+			} */
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="boxer" style="left:0px;">
+				<img src="images/01_03.gif" alt="11" title="1">
+				<img src="images/02_03.gif" alt="11" title="2">
+				<img src="images/03_03.gif" alt="11" title="3">
+				<img src="images/04_03.gif" alt="11" title="4">
+			</div>
+			<!-- <div class="buttons">
+				<span class="on">1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>				
+			 </div> -->
+			<div class="fuhao">
+				<div class="arrce left">&lt;</div>
+				<div class="arrce right">&gt;</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	// 获取元素
+	var boxEr = document.querySelector('.boxer');
+	var leftp = document.querySelector('.left');	
+	var rightp = document.querySelector('.right');
+	
+
+	//手动循环
+	leftp.onclick = function() {
+		last_pic();
+	}
+	rightp.onclick = function() {
+		next_pic();
+	}
+	function next_pic() {	
+		//console.log(boxEr.style.left)
+		var newleft;
+		if(boxEr.style.left === '-1500px') {
+			newleft = 0;
+		} else {
+			newleft = parseInt(boxEr.style.left) - 500;
+		}
+		boxEr.style.left = newleft + 'px';
+		// var newleft = parseInt(boxEr.style.left) - 500;
+		// boxEr.style.left = newleft + 'px';	
+			
+		// index++;
+		// if(index > 3) {
+		// 	index = 0;
+		// }
+	}
+	function last_pic() {	
+		//console.log(boxEr.style.left)
+		var newleft;
+		if(boxEr.style.left === '0px') {
+			newleft = -1500;
+		} else {
+			newleft = parseInt(boxEr.style.left) + 500;
+		}
+		boxEr.style.left = newleft + 'px';
+		// var newleft = parseInt(boxEr.style.left) + 500;
+		// boxEr.style.left = newleft + 'px';
+		
+		// index--;
+		// if(index < 0){
+		// 	index = 3;
+		// }
+		// showCurrentDot();
+	}
+	
+	//自动循环
+	var timer = null;
+	function autoplay() {
+		timer = setInterval(function(){
+			next_pic(); 
+		},1000);
+	}
+	autoplay();
+	//鼠标进入停止 轮播 鼠标离开开启 定时器
+	var Box = document.querySelector('.box');
+	Box.onmouseenter = function() {
+		clearInterval(timer);
+	}
+	Box.onmouseleave = function() {
+		autoplay();
+	}
+	
+	// var index = 0;
+	// var dots = document.querySelectorAll('span');
+	// function showCurrentDot() {
+	// 	for (var i = 0;i < dots.length; i++) {
+	// 		dots[i].className = '';
+	// 	}
+	// 	dots[index].className = 'on';
+	// }
+	
+</script>
